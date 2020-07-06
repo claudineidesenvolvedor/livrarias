@@ -1,5 +1,5 @@
 # Livraria
-Sistema de Emprstismo de Livros
+Sistema de Empréstismo de Livros
 
 Tecnologias ultilizadas:
 
