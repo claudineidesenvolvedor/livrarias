@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<ui:composition template="/template/layoutBase.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form-cadastro">
+			<p:tabView style="width:600px;height:auto;margin:auto;">
+
+				<p:growl id="growl-mensagem" showDetail="true" sticky="true" />
+				<p:tab title="Cadastro de Pessoa">
+					<h:panelGrid id="panelGrid-campos-form" columns="2"
+						cellpadding="10">
+
+						<p:outputLabel value="Nome" for="inputText-nome" />
+						<p:inputText id="inputText-nome" style="width:300px"
+							maxlength="70"
+							value="#{cadastrarPessoaController.pessoaModel.nome}"
+							required="true"
+							requiredMessage="O nome é de preenchimento obrigatório" />
+
+						<p:outputLabel value="CPF" for="inputMask-CPF" />
+						<p:inputMask mask="999.999.999-99" id="inputMask-CPF" size="10"
+							value="#{cadastrarPessoaController.pessoaModel.CPF}"
+							required="true"
+							requiredMessage="O CNPJ é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Tipo Sexo" for="selectOneMenu-tipoSexo" />
+						<p:selectOneMenu id="selectOneMenu-tipoSexo" required="true"
+							value="#{cadastrarPessoaController.pessoaModel.sexo}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastrarPessoaController.tipoSexo}"
+								var="sexo" itemValue="#{sexo}" itemLabel="#{sexo.descricao}" />
+						</p:selectOneMenu>
+
+						<!---->
+						<p:outputLabel for="instituicao" value="Instituição" />
+						<p:selectOneMenu id="instituicao" converter="instituicaoConverter"
+							value="#{cadastrarPessoaController.instituicaoModel}"
+							required="true" requiredMessage="Intituição e obrigatório">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems
+								value="#{consultarInstituicaoController.insitituicoes}"
+								var="instituicao" itemLabel="#{instituicao.nome}"
+								itemValue="#{instituicao}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Tipo Telefone:"
+							for="selectOneMenu-TipoTelefone" />
+						<p:selectOneMenu id="selectOneMenu-TipoTelefone"
+							value="#{cadastrarPessoaController.telefoneModel.tipoTelefone}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastrarPessoaController.tipoTelefone}"
+								var="telefone" itemValue="#{telefone}"
+								itemLabel="#{telefone.value}" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel id="lbTelefone" value="Número:"
+							for="inputMask-telefone" />
+						<p:inputMask mask="(999) 9999-9999" id="inputMask-telefone"
+							value="#{cadastrarPessoaController.telefoneModel.numero}" />
+
+						<p:outputLabel value="Email" for="inputText-Email" />
+						<p:inputText id="inputText-Email" style="width:300px"
+							maxlength="70"
+							value="#{cadastrarPessoaController.pessoaModel.email}"
+							requiredMessage="O Email é de preenchimento obrigatório" />
+
+					</h:panelGrid>
+
+
+				</p:tab>
+
+				<p:tab title="Cadastro de Endereço" id="cadastrarEndeco">
+					<h:panelGrid id="panelGrid-campos-form-endereco" columns="2"
+						cellpadding="10">
+
+						<p:outputLabel value="Logradouro" for="inputText-logradouro" />
+						<p:inputText id="inputText-logradouro"
+							value="#{cadastrarPessoaController.enderecoModel.logradouro}"
+							required="true"
+							requiredMessage="O logradouro é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Complemento" for="inputText-complemento" />
+						<p:inputText id="inputText-complemento"
+							value="#{cadastrarPessoaController.enderecoModel.complemento}"
+							requiredMessage="O complemento é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Número" for="inputText-numero" />
+						<p:inputText id="inputText-numero"
+							value="#{cadastrarPessoaController.enderecoModel.numero}"
+							requiredMessage="O Número é de preenchimento obrigatório" />
+
+						<p:outputLabel value="CEP" for="inputText-cep" />
+						<p:inputMask mask="99999-999" id="inputText-cep" size="10"
+							value="#{cadastrarPessoaController.enderecoModel.cep}"
+							required="true"
+							requiredMessage="O CEP é de preenchimento obrigatório" />
+
+						<p:outputLabel value="País" for="inputText-pais" />
+						<p:inputText id="inputText-pais"
+							value="#{cadastrarPessoaController.enderecoModel.pais}"
+							required="true"
+							requiredMessage="O País é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Estado" for="inputText-estado" />
+						<p:inputText id="inputText-estado"
+							value="#{cadastrarPessoaController.enderecoModel.estado}"
+							required="true"
+							requiredMessage="O estado é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Cidade" for="inputText-cidade" />
+						<p:inputText id="inputText-cidade"
+							value="#{cadastrarPessoaController.enderecoModel.cidade}"
+							required="true"
+							requiredMessage="O Cidade é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Bairro" for="inputText-bairro" />
+						<p:inputText id="inputText-bairro"
+							value="#{cadastrarPessoaController.enderecoModel.bairro}"
+							required="true"
+							requiredMessage="O Bairro é de preenchimento obrigatório" />
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab title="Cadastro de Usuário">
+					<h:panelGrid id="panelGrid-campos-usuario" columns="2"
+						cellpadding="10">
+
+						<p:outputLabel value="Tipo" for="selectOneMenu-Tipo" />
+						<p:selectOneMenu id="selectOneMenu-Tipo" required="true"
+							value="#{cadastrarPessoaController.usuarioModel.tipo}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{cadastrarPessoaController.tipo}"
+								var="tipo" itemValue="#{tipo}" itemLabel="#{tipo.value}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Usuário" for="inputText-usuario" />
+						<p:inputText id="inputText-usuario" required="true" maxlength="70"
+							value="#{cadastrarPessoaController.usuarioModel.usuario}"
+							requiredMessage="O usuario é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Senha" for="inputText-senha" />
+						<p:password id="inputText-senha" required="true" maxlength="70"
+							value="#{cadastrarPessoaController.usuarioModel.senha}"
+							requiredMessage="O senha é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Confirmação" for="inputText-comfirmacao" />
+						<p:password id="inputText-comfirmacao" required="true"
+							maxlength="70" value="#{cadastrarPessoaController.confirmacao}"
+							requiredMessage="O confirmação é de preenchimento obrigatório" />
+
+
+
+					</h:panelGrid>
+					<p:spacer />
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="warn" />
+					<p:messages autoUpdate="true" closable="true" severity="error" />
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="info" />
+
+					<p:commandButton value="Salvar" id="commandButton-salvar"
+						icon="ui-icon-gear"
+						actionListener="#{cadastrarPessoaController.SalvarNovo}"
+						update="form-cadastro, growl-mensagem" />
+
+
+				</p:tab>
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

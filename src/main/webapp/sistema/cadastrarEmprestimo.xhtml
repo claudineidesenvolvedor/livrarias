@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<ui:composition template="/template/layoutBase.xhtml">
+
+	<ui:define name="content">
+		<h:form id="form-cadastro-emprestimo">
+			<p:tabView style="width:600px;height:auto;margin:auto;">
+
+				<p:growl id="growl-mensagem" showDetail="true" sticky="true" />
+				<p:tab title="Cadastro de Empréstimo">
+					<h:panelGrid id="panelGrid-campos-form" columns="2"
+						cellpadding="10">
+
+						<p:outputLabel value="Pessoa" for="pessoa" />
+						<p:selectOneMenu id="pessoa" converter="pessoaConverter"
+							value="#{cadastrarEmprestimoController.pessoaModel}"
+							required="true" requiredMessage="Intituição e obrigatório">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{consultarPessoaController.pessoas}"
+								var="pessoa" itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" />
+						</p:selectOneMenu>
+
+
+						<p:outputLabel value="Livro" for="livro" />
+						<p:selectOneMenu id="livro"
+							value="#{cadastrarEmprestimoController.livroModel}"
+							converter="livroConverter">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{consultarLivroController.livros}"
+								var="#{livro}" itemLabel="#{livro.titulo}" itemValue="#{livro}" />
+						</p:selectOneMenu>
+						<!--  -->
+					</h:panelGrid>
+					<p:spacer />
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="warn" />
+					<p:messages autoUpdate="true" closable="true" severity="error" />
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="info" />
+
+					<p:commandButton value="Salvar" id="commandButton-salvar"
+						icon="ui-icon-gear"
+						actionListener="#{cadastrarEmprestimoController.SalvarNovo}"
+						update="form-cadastro-emprestimo growl-mensagem" />
+
+
+				</p:tab>
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+
+		<h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+			<p:outputLabel value="Código" for="inputText-codigo" />
+			<p:inputText id="inputText-codigo"
+				value="#{consultarLivroController.livroModel.codigo}"
+				style="width:50px" readonly="true" />
+
+			<p:outputLabel value="Titulo" for="inputText-titulo" />
+			<p:inputText id="inputText-titulo" style="width:300px" maxlength="70"
+				value="#{consultarLivroController.livroModel.titulo}"
+				required="true"
+				requiredMessage="O titulo é de preenchimento obrigatório" />
+
+			<p:outputLabel value="Sinopse" for="inputText-sinopse" />
+			<p:inputText id="inputText-sinopse" style="width:300px"
+				maxlength="70"
+				value="#{consultarLivroController.livroModel.sinopse}"
+				required="true"
+				requiredMessage="O sinopse é de preenchimento obrigatório" />
+
+			<p:outputLabel value="Autor" for="inputText-autor" />
+			<p:inputText id="inputText-autor" required="true"
+				requiredMessage="Campo Autor é obrigatório."
+				value="#{consultarLivroController.autorModel.nome}" />
+
+			<p:outputLabel value="Genêro" for="inputText-genero" />
+			<p:inputText id="inputText-genero" required="true"
+				requiredMessage="Campo Genêro é obrigatório."
+				value="#{consultarLivroController.generoModel.nome}" />
+
+			<p:outputLabel value="Capa" for="inputText-capa" />
+			<p:fileUpload id="inputText-capa"
+				fileUploadListener="#{consultarLivroController.enviarImagem}"
+				label="Escolher" uploadLabel="Enviar" cancelLabel="Cancelar"
+				allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+				invalidFileMessage="São permitidas somente imagens gif, jpe, jpeg, e png)"
+				sizeLimit="10002400"
+				invalidSizeMessage="O tamanho máximo permitido é de 1KB."
+				fileLimit="5"
+				fileLimitMessage="Só é possível escolher 5 arquivos por vez."
+				multiple="true" auto="false"
+				onstart="console.log('Iniciando envio de arquivo')"
+				onerror="console.log('Erro na requisição de envio')"
+				oncomplete="console.log('Envio concluído')" />
+			<!-- allowTypes="/(\.|\/)(gif|jpe?g|png)$/" -->
+
+
+			<p:spacer />
+			<p:commandButton value="Alterar" id="commandButton-alterar"
+				icon="ui-icon-gear"
+				actionListener="#{consultarLivroController.AlterarRegistro}"
+				oncomplete="PF('dialog-modal-editar').hide();"
+				update="form-consulta" />
+
+
+			<p:spacer />
+			<p:messages showDetail="false" autoUpdate="true" closable="true"
+				severity="error" />
+
+		</h:panelGrid>
+
+	</h:form>
+
+</ui:composition>

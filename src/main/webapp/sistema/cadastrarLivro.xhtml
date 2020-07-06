@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<ui:composition template="/template/layoutBase.xhtml">
+
+
+	<ui:define name="content">
+		<p:tabView style="width:600px;height:370px;margin:auto;">
+			<p:tab title="Cadastro de Livro">
+				<h:form id="form-cadastro">
+					<p:growl id="growl-mensagem" showDetail="true" sticky="true" />
+
+					<h:panelGrid id="panelGrid-campos-form" columns="2"
+						cellpadding="10">
+
+						<p:outputLabel value="Titulo" for="inputText-titulo" />
+						<p:inputText id="inputText-titulo" style="width:300px"
+							maxlength="70"
+							value="#{cadastrarLivroController.livroModel.titulo}"
+							required="true"
+							requiredMessage="O titulo é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Sinopse" for="inputText-sinopse" />
+						<p:inputText id="inputText-sinopse" style="width:300px"
+							maxlength="70"
+							value="#{cadastrarLivroController.livroModel.sinopse}"
+							required="true"
+							requiredMessage="O sinopse é de preenchimento obrigatório" />
+
+						<p:outputLabel value="Autor" for="inputText-autor" />
+						<p:inputText id="inputText-autor" required="true"
+							requiredMessage="Campo Autor é obrigatório."
+							value="#{cadastrarLivroController.autorModel.nome}" />
+
+						<p:outputLabel value="Genêro" for="inputText-genero" />
+						<p:inputText id="inputText-genero" required="true"
+							requiredMessage="Campo Genêro é obrigatório."
+							value="#{cadastrarLivroController.generoModel.nome}" />
+
+						<p:outputLabel value="Capa" for="inputText-capa" />
+						<p:fileUpload id="inputText-capa"
+							fileUploadListener="#{cadastrarLivroController.enviarImagem}"
+							label="Escolher" uploadLabel="Enviar" cancelLabel="Cancelar"
+							allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+							invalidFileMessage="São permitidas somente imagens gif, jpe, jpeg, e png)"
+							sizeLimit="10002400"
+							invalidSizeMessage="O tamanho máximo permitido é de 1KB."
+							fileLimit="5"
+							fileLimitMessage="Só é possível escolher 5 arquivos por vez."
+							multiple="true" auto="false"
+							onstart="console.log('Iniciando envio de arquivo')"
+							onerror="console.log('Erro na requisição de envio')"
+							oncomplete="console.log('Envio concluído')" />
+						<!-- allowTypes="/(\.|\/)(gif|jpe?g|png)$/" -->
+
+
+					</h:panelGrid>
+
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="warn" />
+					<p:messages autoUpdate="true" closable="true" severity="error" />
+					<p:messages showDetail="true" autoUpdate="true" closable="true"
+						severity="info" />
+
+					<p:commandButton value="Salvar" id="commandButton-salvar"
+						icon="ui-icon-gear"
+						actionListener="#{cadastrarLivroController.SalvarNovoLivro}"
+						update="panelGrid-campos-form, growl-mensagem" />
+
+				</h:form>
+
+			</p:tab>
+		</p:tabView>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>
